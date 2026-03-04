@@ -1,87 +1,90 @@
 # WebApp - Projeto RPG
 
-Aplicação Web em Python desenvolvida utilizando, principalmente, **Flask**, **Jinja2** e **SQL Alchemy**, com a finalidade de representar um **CRUD** para personagens de RPG.
+# WebApp - Projeto RPG
 
-## 📜 Desenvolvimento do projeto
+Веб-приложение на Python, разработанное с использованием **Flask**, **Jinja2** и **SQLAlchemy**, с целью реализации **CRUD-системы** для персонажей настольных ролевых игр (RPG).
 
-O site foi projetado como um aprendizado e prática para o desenvolvimento de aplicações WEB utilizando Python e suas diversas bibliotecas que vem a facilitar o processo.
-Desenvolvido na disciplina de Programação do segundo ano de **Técnico de Informática no Instituto Federal Catarinense - Campus Blumenau**.
+## 📜 Разработка проекта
 
-A estrutura e funcionalidade do projeto foram planejadas para a disciplina de **Engenharia de Sofwate** e podem ser econtrados em:
+Сайт был разработан в качестве учебного проекта и практики создания веб-приложений на Python с использованием различных библиотек, упрощающих процесс разработки.  
+Проект создан в рамках курса программирования второго года обучения по специальности «Информационные технологии» в Федеральном институте Санта-Катарины — кампус Блуменау.
 
-* [Diagrama de Casos de Uso](https://drive.google.com/file/d/1f9U2Ca80Q15Q7hxFw4ebObOhR_xMrVkx/view?usp=sharing) - Divisão das persmissões e limitações de cada nível de usuário.
-* [Diagrama de Classes - UML ](https://cdn.discordapp.com/attachments/419058354187403264/777969219946020884/unknown.png) - Utilizado como base para as funcionalidades e lógica das classes.
-* [Requisitos Funcionais e Não-Funcionais](https://drive.google.com/file/d/1PWxJt2yFt8fbNCbKFLRKZgQPZ4GM0LYl/view?usp=sharing) - Requisitos levantados para o projeto.
-* [Diagrama de Atividade para Login e Edição de Personagens ](https://drive.google.com/file/d/165e2T-PaWqprlfVevT9Vl2jfIrJ6jjBq/view?usp=sharing) - Base para o funcionamento  e restrições do login de usuários e da edição de personagens.
+Структура и функциональность проекта были спланированы в рамках дисциплины **Инженерия программного обеспечения** и доступны по ссылкам:
 
+* [Диаграмма вариантов использования](https://drive.google.com/file/d/1f9U2Ca80Q15Q7hxFw4ebObOhR_xMrVkx/view?usp=sharing) — Описание прав и ограничений для каждого уровня пользователя.
+* [Диаграмма классов — UML ](https://cdn.discordapp.com/attachments/419058354187403264/777969219946020884/unknown.png) — Использована как основа для реализации функциональности и логики классов.
+* [Функциональные и нефункциональные требования](https://drive.google.com/file/d/1PWxJt2yFt8fbNCbKFLRKZgQPZ4GM0LYl/view?usp=sharing) — Перечень требований, собранных для проекта.
+* [Диаграмма активности для входа и редактирования персонажей](https://drive.google.com/file/d/165e2T-PaWqprlfVevT9Vl2jfIrJ6jjBq/view?usp=sharing) — Основа для работы и ограничений системы входа и редактирования персонажей.
 
-## 🛠 Download e Uso
+## 🛠 Скачивание и использование
 
-A aplicação que está disponível para download contem todos os arquivos estruturais, alguns personagem e usuários já registrados para teste e experimentação. Porém, para ainda são necessáriso alguns passos para que tal projeto possa ser enviado à um servidor Linux propriamente dito.
+Приложение, доступное для скачивания, содержит все структурные файлы, а также уже зарегистрированных персонажей и пользователей для тестирования и экспериментов. Однако для запуска проекта на сервере Linux необходимо выполнить несколько дополнительных шагов.
 
-Além de por comandos de terminal, o site pode ser iniciado em um servidor local através da execução do módulo "rodar.py"
+Помимо запуска через терминал, сайт можно запустить локально, выполнив модуль `rodar.py`.
 
+### ✔️ Требования
 
-### ✔️ Requerimentos
+Проект использует в основном библиотеки Flask (и связанные с ним расширения) и SQLAlchemy. Все зависимости можно установить одной командой из файла `requirements.txt`, который входит в состав проекта.
 
-O projeto faz o uso, principalmente, das biblioteca Flask(e vários derivados menores) e SQL Aclhemy, porém tudo deve ser atendido com um simples pip install do arquivo requirements.txt, naturalmente presente no pacote.
-
-Em caso de problemas ou dúvidas, apenas rode o seguinte no terminal, uma vez dentro da pasta:
+Если возникнут проблемы или вопросы, просто выполните в терминале (предварительно перейдя в папку проекта):
 ```
 python3 -m pip install -r requirements.txt
 ```
 
-### ⁉️ Compreensão por terceiros
 
-Como comentado anteriormente, o projeto apresenta todos os arquivos necessáriso para seu funcionamento livres para download e modificação, seguindo boas práticas de organização, identação, blueprints, etcs. ao decorrer de todos os arquivos. 
+### ⁉️ Понимание кода третьими лицами
 
-Toda a funcionalidade é comentada de forma que qualquer usuário consiga compreender as funções, modificá-las e/ou reutilizá-las.
+Как уже упоминалось, проект включает все необходимые файлы для своей работы, оформленные с соблюдением лучших практик: чёткая организация, отступы, использование blueprints и т.д. во всех файлах.
 
-## 🗃 Banco de Dados
+Вся функциональность подробно прокомментирована, чтобы любой пользователь мог понять, изменить или повторно использовать её.
 
-A aplicação utiliza a biblioteca SQL Alchemy para o controle do Banco de Dados.
-O download do projeto já vem com um bando de dados que contem alguns personagens, usuários e avaliações.
-A estrutura e o dados podem ser visualizados com a utilização de uma série de programas, como o [DB Browser](https://sqlitebrowser.org/)
+## 🗃 База данных
+
+Приложение использует библиотеку SQL Alchemy для управления базой данных.  
+Скачанная версия проекта уже содержит базу данных с примерами персонажей, пользователей и оценок.  
+Структуру и данные можно просмотреть с помощью таких программ, как [DB Browser](https://sqlitebrowser.org/)
 
 [![db1.png](https://i.ibb.co/JFZ8LX9/db1.png)](https://i.ibb.co/JFZ8LX9/db1.png)
 
-## 🧑‍🤝‍🧑 Usuários
+## 🧑‍🤝‍🧑 Пользователи
 
-No sistema, existem basicamente três tipos de usuários: o não logado, o logado e o admin. 
-Cada um possuí um nível próprio de acesso ao dados de outros usuários e dos personagens registrados(tal nível é representados ao lado do nome do usuário quando o mesmo é visto no site, vide screenshot abaixo).
-Esses níveis de acesso podem ser melhor visualizados no * [Diagrama de Casos de Uso](https://drive.google.com/file/d/1f9U2Ca80Q15Q7hxFw4ebObOhR_xMrVkx/view?usp=sharing) do projeto.
+В системе существует три типа пользователей: неавторизованный, авторизованный и администратор.  
+У каждого из них свой уровень доступа к данным других пользователей и персонажам (уровень отображается рядом с именем пользователя на сайте, см. скриншот ниже).  
+Эти уровни доступа подробно описаны в * [Диаграмме вариантов использования](https://drive.google.com/file/d/1f9U2Ca80Q15Q7hxFw4ebObOhR_xMrVkx/view?usp=sharing).
 
-Além disso, cada um tem seu perfil pessoal, com seus personagens registrados indexados.
+Кроме того, у каждого пользователя есть личный профиль, где отображаются созданные им персонажи.
 
 [![perf1.png](https://i.ibb.co/H4VGw8H/perf1.png)](https://i.ibb.co/H4VGw8H/perf1.png)
 
-### 🔑 Login e recuperação de senha
+### 🔑 Вход и восстановление пароля
 
-Como na maioria dos sites, o ProjetoRPG possuí um sistema de registro e login de usuários.
-Caso algum venha a perder seus dados, o mesmo pode resquisitar um e-mail de redefinição de senha para o endereço informado no momento do registro da conta.
+Как и на большинстве сайтов, на ProjetoRPG реализована система регистрации и входа в аккаунт.  
+Если пользователь забудет свои данные, он может запросить письмо для смены пароля на указанный при регистрации адрес электронной почты.
 
 [![log1.png](https://i.ibb.co/W3h7TCd/log1.png)](https://i.ibb.co/W3h7TCd/log1.png)
 
+## ⚔️ Структура персонажей
 
-## ⚔️ Estrutura de personagens
+Сайт разработан так, чтобы служить хранилищем персонажей, созданных сообществом, с профилями пользователей и возможностью оценивать каждого персонажа текстом и рейтингом.
 
-O site foi desenvolvido de maneira que funcionasse como um repositório para personages de RPG criados pela comunidade, tendo também perfis para os usuários e permitindo que cada personagem seja avaliado com um texto e nota.
-
-Tal propósito já é visto na página inicial, aonde há uma seção com os personagens mais recentemente registrados, apresentando também seus dados principais e nota.
+Цель проекта видна уже на главной странице, где представлены недавно зарегистрированные персонажи с их основными данными и оценками.
 
 [![home1.png](https://i.ibb.co/HTTTrVt/home1.png)](https://i.ibb.co/HTTTrVt/home1.png)
 
-### Registro de novos personagens e edição
-Uma vez que o usuário está logado no site, ele pode registrar um personagem, informando uma série de dados e uma foto opcional, tal formulário é o mesmo que é utilizado para a posterior edição de algum personagem.
+### Регистрация новых персонажей и редактирование
+
+После входа в систему пользователь может зарегистрировать персонажа, указав ряд параметров и прикрепив изображение (необязательно). Для последующего редактирования используется тот же самый формат.
 
 [![reg2.png](https://i.ibb.co/dJcwLQs/reg2.png)](https://i.ibb.co/dJcwLQs/reg2.png)
 
-### 🔍 Sitema de busca
+### 🔍 Система поиска
 
-Para buscar por um personagem, pode-se escolher preencher uma série de campos sobre o mesmo e então receber todos os que corespondem ao dados.
-(Os campos que não forem preenchidos, serão desconsiderados na pesquisa do DB uma vez que a querry será um like com "%%" - onde não há nenhuma dado entre os sinais de porcentagem)
+Для поиска персонажа можно заполнить один или несколько полей, после чего будут показаны все совпадающие результаты.  
+Поля, которые не заполнены, игнорируются, так как в запросе к базе данных используется оператор `LIKE` с шаблоном `"%%"` (где между символами процента нет данных).
 
 [![pesq1.png](https://i.ibb.co/G2XQkgK/pesq1.png)](https://i.ibb.co/G2XQkgK/pesq1.png)
+
+Пример кода поиска:
 
 Tal processo de pesquisar seguinda alguns parametros informados, ou nãom, pode ser visto de forma resumida nessa parte do código:
 
@@ -93,12 +96,11 @@ personagens = db.session.query(Personagem).filter(
                                                  ).from_self().paginate(page=1, per_page=9)
 ```
 
-### Página específica do personagem
 
-Ao clicar na imagem ou nome de um personagem, o usuário é redirecionado para uma página própria, com as informações mais detalhadas do mesmo e as avaliações feitas pela comunidade.
-Caso ainda não tenha, o usuário pode avaliar o personagem, ou também editar caso já possua alguma.
+### Страница персонажа
+
+При клике на имя или изображение персонажа пользователь переходит на отдельную страницу с подробной информацией и отзывами от сообщества.  
+Если пользователь ещё не оценивал этого персонажа, он может сделать это. Также можно редактировать свою оценку, если она уже была оставлена.
 
 [![rev1.png](https://i.ibb.co/VCrv7W2/rev1.png)](https://i.ibb.co/VCrv7W2/rev1.png)
-
-
 

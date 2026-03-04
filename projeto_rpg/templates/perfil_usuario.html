@@ -1,27 +1,25 @@
 {% extends "layout.html" %}
 {% block content %}
 
-    
     <div class="content-section">
         <div class="media pt-1">
             <img class="account-img mt-3" src="{{ url_for('static', filename='imagens_perfil/' + usuario.foto) }}">
             <div class="media-body">
                 <h2 class="account-heading ml-4 mt-1">
                     {% if usuario.isAdmin == True %}
-                        <span style = "color: #C60000">[Admin]</span>
+                        <span style="color: #C60000">[Admin]</span>
                     {% endif %}
-                    {{usuario.nome}}
+                    {{ usuario.nome }}
                 </h2>
-                <p class="text-secondary ml-4">{{usuario.email}}<br>
-                Membro desde: {{ usuario.data_registro.strftime('%d-%m-%Y') }}</p>
+                <p class="text-secondary ml-4">{{ usuario.email }}<br>
+                {{ _('Участник с') }}: {{ usuario.data_registro.strftime('%d-%m-%Y') }}</p>
                 {% if usuario == current_user %}
-                <!-- Botão para alterar a senha -->
+                    <!-- Ссылка на изменение пароля -->
                     <p class="text-secondary ml-4">
-                        <a href="{{ url_for('requisitar_recuperacao')}}">Alterar a senha</a>
+                        <a href="{{ url_for('usuarios.requisitar_recuperacao') }}">{{ _('Изменить пароль') }}</a>
                     </p>
                 {% endif %}
             </div>
-            
         </div>
 
         {% if usuario == current_user %}
@@ -29,13 +27,11 @@
                 {{ form_editar_conta.hidden_tag() }}
 
                 <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">{{ _('Редактировать данные пользователя') }}</legend>
 
-                    <legend class="border-bottom mb-4">Editar dados do usuário</legend>
-                
+                    <!-- Имя пользователя -->
                     <div class="form-group">
                         {{ form_editar_conta.nome.label(class="form-control-label") }}
-
-                        <!-- Nome de usuário-->
                         {% if form_editar_conta.nome.errors %}
                             {{ form_editar_conta.nome(class="form-control form-control-lg is-invalid") }}
                             <div class="invalid-feedback">
@@ -48,7 +44,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- E-mail -->
+                    <!-- Электронная почта -->
                     <div class="form-group">
                         {{ form_editar_conta.email.label(class="form-control-label") }}
                         {% if form_editar_conta.email.errors %}
@@ -63,109 +59,104 @@
                         {% endif %}
                     </div>
 
-                    <!-- Foto de perfil -->
+                    <!-- Фото профиля -->
                     <div class="form-group">
-                        {{ form_editar_conta.imagem_perfil.label() }}
-                        {{ form_editar_conta.imagem_perfil(class='form-control-file') }}
+                        {{ form_editar_conta.imagem_perfil.label(class="form-control-label") }}
+                        {{ form_editar_conta.imagem_perfil(class="form-control-file") }}
                         {% if form_editar_conta.imagem_perfil.errors %}
-                                {% for error in form_editar_conta.imagem_perfil.errors %}
-                                    <span class='text-danger col text-right'>{{ error }}</span></br>
-                                {% endfor %}
+                            {% for error in form_editar_conta.imagem_perfil.errors %}
+                                <span class="text-danger">{{ error }}</span><br>
+                            {% endfor %}
                         {% endif %}
-
+                    </div>
                 </fieldset>
 
-                <!-- Botão de enviar atualizações da conta-->
+                <!-- Кнопка сохранения изменений -->
                 <div class="row">
                     <div class="form-group col text-right">
                         {{ form_editar_conta.botao_editar(class="btn btn-success") }}
                     </div>
                 </div>
-
             </form>
         {% endif %}
 
-
-        <!-- Botão de apagar conta -->
+        <!-- Кнопка удаления аккаунта -->
         <div class="row mb-3">
             {% if usuario == current_user or current_user.isAdmin == True %}
                 <div class="form-group col text-right">
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal">Apagar conta</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal">{{ _('Удалить аккаунт') }}</button>
                 </div>
-                <!-- Modal -->
+
+                <!-- Модальное окно подтверждения -->
                 <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="DeleteModalLongTitle">Apagar <span class="modal-nome"> {{usuario.nome}} </span></h5>
-                            <span class="modal-span">Tem certeza que deseja apagar esse usuários e todos seus personagens?</span>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="DeleteModalLongTitle">{{ _('Удалить') }} <span class="modal-nome">{{ usuario.nome }}</span></h5>
+                                <span class="modal-span">{{ _('Вы действительно хотите удалить этого пользователя и всех его персонажей?') }}</span>
+                            </div>
+                            <div class="modal-body">
+                                {{ _('После удаления восстановить аккаунт и персонажей будет невозможно!') }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _('Закрыть') }}</button>
+                                <form action="{{ url_for('usuarios.apagar_usuario', usuario_id=usuario.id) }}" method="POST">
+                                    <input class="btn btn-danger" type="submit" value="{{ _('Удалить') }}">
+                                </form>
+                            </div>
                         </div>
-                    <div class="modal-body">
-                        Uma vez apagado, esse usuário e seus personagens não poderão mais ser recuperados!
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                            <form action="{{url_for('usuarios.apagar_usuario', usuario_id=usuario.id )}}" method="POST">
-                                <input class="btn btn-danger" type="submit" value="Apagar">
-                            </form>
                     </div>
                 </div>
-                </div>
-        </div>
             {% endif %}
         </div>
-
     </div>
 
     {% if (personagens.items)|length > 0 %}
-        <!-- Mostrar os personagens registrados pelo usuário-->
+        <!-- Список персонажей пользователя -->
         <fieldset class="justify-content-xl-center procurar1">
-        <h2 class="ml-1">Personagens registrados pelo usuário</h2>
-        <div class="container-fluid">
-            <div class="row">
-                {% for personagem in personagens.items %}
-                    <card class="media content-section col-md-4 mb-4 m-1" style="max-width: 340px; min-width: 310px; text-align: center;">
-                    <div class="media-body">
-                        <div class="article-metadata">
-                        <span class="mr-2">Raça: {{ personagem.raca }}</span>
-                        <small class="text-muted">Classe: {{ personagem.classe }}</small>
-                        </div>
-                        <h2><a class="article-title" href="{{url_for('personagens.mostrar_personagem', personagem_id=personagem.id)}}">{{ personagem.nome }}</a></h2>
-                        <p class="article-content">Nível: {{ personagem.nivel }}</p>
-                        <a href="{{url_for('personagens.mostrar_personagem', personagem_id=personagem.id)}}">
-                            <img class="account-img" src="{{ url_for('static', filename='imagens_personagens/' + personagem.foto) }}">
-                        </a>
-                        <p class="article-content">Criador por: <a  href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = personagem.autor.id)}}">{{ personagem.autor.nome }}</a></p>
-                        {% if personagem.nota == None %}
-                            <p class="article-content"><span class="fonte_mec", style="color: #CE0000">Ainda não</span> avaliado pela comunidade!</span></p>
-                        {% else %}
-                            <p class="article-content">Nota da comunidade: <span class="fonte_mec", style="color: #CE0000">{{ personagem.nota}}</span></p>
-                        {% endif %}
-                        <small class="text-muted">Criado em: {{ personagem.data_criacao.strftime('%d-%m-%Y') }}</small>
-                    </div>
-                    </card>
-                {% endfor %}
+            <h2 class="ml-1">{{ _('Персонажи, зарегистрированные пользователем') }}</h2>
+            <div class="container-fluid">
+                <div class="row">
+                    {% for personagem in personagens.items %}
+                        <card class="media content-section col-md-4 mb-4 m-1" style="max-width: 340px; min-width: 310px; text-align: center;">
+                            <div class="media-body">
+                                <div class="article-metadata">
+                                    <span class="mr-2">{{ _('Раса') }}: {{ personagem.raca }}</span>
+                                    <small class="text-muted">{{ _('Класс') }}: {{ personagem.classe }}</small>
+                                </div>
+                                <h2><a class="article-title" href="{{ url_for('personagens.mostrar_personagem', personagem_id=personagem.id) }}">{{ personagem.nome }}</a></h2>
+                                <p class="article-content">{{ _('Уровень') }}: {{ personagem.nivel }}</p>
+                                <a href="{{ url_for('personagens.mostrar_personagem', personagem_id=personagem.id) }}">
+                                    <img class="account-img" src="{{ url_for('static', filename='imagens_personagens/' + personagem.foto) }}">
+                                </a>
+                                <p class="article-content">{{ _('Создано') }}: <a href="{{ url_for('usuarios.mostrar_perfil_usuario', usuario_id=personagem.autor.id) }}">{{ personagem.autor.nome }}</a></p>
+                                {% if personagem.nota == None %}
+                                    <p class="article-content"><span class="fonte_mec" style="color: #CE0000">{{ _('Ещё не') }}</span> {{ _('оценено сообществом!') }}</p>
+                                {% else %}
+                                    <p class="article-content">{{ _('Оценка сообщества') }}: <span class="fonte_mec" style="color: #CE0000">{{ personagem.nota }}</span></p>
+                                {% endif %}
+                                <small class="text-muted">{{ _('Дата создания') }}: {{ personagem.data_criacao.strftime('%d-%m-%Y') }}</small>
+                            </div>
+                        </card>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-        
-        
 
-            <!-- Botões para a paginação -->
+            <!-- Пагинация -->
             <div class="text-center">
-                {% for pagina in personagens.iter_pages(left_edge=3, right_edge=3, left_current=3,right_current=3) %}
+                {% for pagina in personagens.iter_pages(left_edge=3, right_edge=3, left_current=3, right_current=3) %}
                     {% if pagina %}
-                        {% if pagina == personagens.page%}
-                            <a class="btn btn-danger mb-4" href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = usuario.id, pagina=pagina)}}">{{pagina}}</a>
+                        {% if pagina == personagens.page %}
+                            <a class="btn btn-danger mb-4" href="{{ url_for('usuarios.mostrar_perfil_usuario', usuario_id=usuario.id, pagina=pagina) }}">{{ pagina }}</a>
                         {% else %}
-                            <a class="btn btn-dark mb-4" href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = usuario.id, pagina=pagina)}}">{{pagina}}</a>
+                            <a class="btn btn-dark mb-4" href="{{ url_for('usuarios.mostrar_perfil_usuario', usuario_id=usuario.id, pagina=pagina) }}">{{ pagina }}</a>
                         {% endif %}
-                        {% else %}
-                            ...
+                    {% else %}
+                        ...
                     {% endif %}
                 {% endfor %}
             </div>
         </fieldset>
-        
     {% endif %}
 
 {% endblock content %}

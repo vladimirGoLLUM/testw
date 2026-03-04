@@ -3,19 +3,19 @@
 
     <article class="media content-section">
         <div class="media-body" >
-            <div class="container p-0 m-0">                
+            <div class="container p-0 m-0">
                 <div class="card">
                     <div class="card-body p-0">
                         <div class="row p-0 m-0">
                             <div class="col-md-2 p-0 text-center">
                                     <img class="account-img mt-2" src="{{ url_for('static', filename='imagens_personagens/' + personagem.foto) }}">
-                                    <p class="article-content m-0">Criador por:  <a href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = personagem.autor.id)}}"> {{ personagem.autor.nome }}</a></p>
-                                    <small class="text-muted">Criado em: {{ personagem.data_criacao.strftime('%d-%m-%Y') }}</small>
+                                    <p class="article-content m-0">{{ _('Создано') }}:  <a href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = personagem.autor.id)}}"> {{ personagem.autor.nome }}</a></p>
+                                    <small class="text-muted">{{ _('Дата создания') }}: {{ personagem.data_criacao.strftime('%d-%m-%Y') }}</small>
                                 <div class="container float-left text-left"></div>
                                 {% if personagem.nota == None %}
-                                    <p class="article-content mb-3"><span class="fonte_mec", style="color: #CE0000">Ainda não</span> avaliado pela comunidade!</span></p>
+                                    <p class="article-content mb-3"><span class="fonte_mec", style="color: #CE0000">{{ _('Ещё не') }}</span> {{ _('оценено сообществом!') }}</span></p>
                                 {% else %}
-                                    <h2 class="text-center mb-3">Nota: <span style="color: #CE0000">{{personagem.nota}}</span></h2>
+                                    <h2 class="text-center mb-3">{{ _('Оценка') }}: <span style="color: #CE0000">{{personagem.nota}}</span></h2>
                                 {% endif %}
                             </div>
                             <div class="col-md-10 ml-0">
@@ -24,40 +24,40 @@
                                 </div>
 
                                     <div class="row text-center">
-                                        <span class="col-md lead"><span class="vermelho">Raça:</span> {{ personagem.raca }}</span>
-                                        <span class="col-md lead"><span class="vermelho">Classe:</span> {{ personagem.classe }}</span>
-                                        <span class="col-md lead"><span class="vermelho">Nível: </span>{{ personagem.nivel }}</span>
+                                        <span class="col-md lead"><span class="vermelho">{{ _('Раса') }}:</span> {{ personagem.raca }}</span>
+                                        <span class="col-md lead"><span class="vermelho">{{ _('Класс') }}:</span> {{ personagem.classe }}</span>
+                                        <span class="col-md lead"><span class="vermelho">{{ _('Уровень') }}: </span>{{ personagem.nivel }}</span>
                                     </div>
 
                                     <div class="container mt-4">
                                         <div class="row p-0 text-center">
-                                                    
+
                                             <div class="col" >
-                                                <span class="col mr-3 pl-4 vermelho fonte_mec">Força</span>
-                                                <span class="col"> {{ personagem.forca }}</span> 
+                                                <span class="col mr-3 pl-4 vermelho fonte_mec">{{ _('Сила') }}</span>
+                                                <span class="col"> {{ personagem.forca }}</span>
                                             </div>
-                                                    
+
                                             <div class="col">
-                                                    <span class="col vermelho fonte_mec">Destreza</span> 
-                                                    <span class="col">{{ personagem.destreza }}</span>  
-                                            </div>
-                                            <div class="col">
-                                                <span class="col vermelho fonte_mec">Constituição</span> 
-                                                <span class="col">{{ personagem.constituicao }}</span> 
+                                                    <span class="col vermelho fonte_mec">{{ _('Ловкость') }}</span>
+                                                    <span class="col">{{ personagem.destreza }}</span>
                                             </div>
                                             <div class="col">
-                                                <span class="col vermelho fonte_mec">Inteligencia</span> 
-                                                <span class="col">{{ personagem.inteligencia }}</span> 
+                                                <span class="col vermelho fonte_mec">{{ _('Телосложение') }}</span>
+                                                <span class="col">{{ personagem.constituicao }}</span>
                                             </div>
-                                                
                                             <div class="col">
-                                                <span class="col vermelho fonte_mec">Sabedoria</span>
+                                                <span class="col vermelho fonte_mec">{{ _('Интеллект') }}</span>
+                                                <span class="col">{{ personagem.inteligencia }}</span>
+                                            </div>
+
+                                            <div class="col">
+                                                <span class="col vermelho fonte_mec">{{ _('Мудрость') }}</span>
                                                 <span class="col">{{ personagem.sabedoria }}</span>
                                             </div>
-                            
+
                                             <div class="col">
-                                                <span class="col vermelho fonte_mec">Carisma</span> 
-                                                <span class="col">{{ personagem.carisma }}</span> 
+                                                <span class="col vermelho fonte_mec">{{ _('Харизма') }}</span>
+                                                <span class="col">{{ personagem.carisma }}</span>
                                             </div>
                                         </div>
 
@@ -66,33 +66,33 @@
                                         </div>
                                     </div>
                             </div>
-                        </div>   
+                        </div>
                     </div>
                 </div>
 
 
-            
-            <!-- Poder editar os dados ou remover caso seja o autor ou admin -->
+
+            <!-- Возможность редактировать или удалить, если пользователь — автор или админ -->
             {% if personagem.autor == current_user or current_user.isAdmin == True %}
                 <div class="text-right mt-4">
-                    <a class="btn btn-success btn-sm m-1" href="{{url_for('personagens.editar_personagem',personagem_id = personagem.id)}}"> Editar</a>
-                    <button type="button" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#DeleteModal">Apagar</button>
+                    <a class="btn btn-success btn-sm m-1" href="{{url_for('personagens.editar_personagem',personagem_id = personagem.id)}}"> {{ _('Редактировать') }}</a>
+                    <button type="button" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#DeleteModal">{{ _('Удалить') }}</button>
                 </div>
-                <!-- Modal para apagar o personagem-->
+                <!-- Модальное окно для удаления персонажа -->
                 <div class="modal fade" id="DeleteModal{{id}}" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="DeleteModalLongTitle">Apagar <span class="modal-nome">{{personagem.nome}}</span></h5>
-                            <span class="modal-span">Tem certeza que deseja apagar esse personagem?</span>
+                            <h5 class="modal-title" id="DeleteModalLongTitle">{{ _('Удалить') }} <span class="modal-nome">{{personagem.nome}}</span></h5>
+                            <span class="modal-span">{{ _('Вы действительно хотите удалить этого персонажа?') }}</span>
                         </div>
                         <div class="modal-body">
-                            Uma vez apagado, esse personagem não podera mais ser recuperado!
+                            {{ _('После удаления восстановить персонаж будет невозможно!') }}
                         </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _('Закрыть') }}</button>
                         <form action="{{url_for('personagens.apagar_personagem', personagem_id = personagem.id)}}" method="POST">
-                    <input class="btn btn-danger" type="submit" value="Apagar">
+                    <input class="btn btn-danger" type="submit" value="{{ _('Удалить') }}">
                 </form>
                 </div>
                 </div>
@@ -105,7 +105,7 @@
 
     {% if not avaliacao_usuario and current_user.is_authenticated%}
 
-        <!-- Registrar uma nova avaliação -->
+        <!-- Оставить новую оценку -->
         {% if personagem.autor != current_user %}
         <div class="content-section p-4 pl-4 pr-4">
             <fieldset class="justify-content-xl-center">
@@ -115,9 +115,9 @@
 
                 <fieldset class="form-group">
 
-                    <legend class="border-bottom fonte_mec">Avaliar o personagem</legend>
-                
-                    <!-- Nota da avaliação -->
+                    <legend class="border-bottom fonte_mec">{{ _('Оценить персонажа') }}</legend>
+
+                    <!-- Оценка -->
                     <div class="form-group">
                             {{ form_avaliar.nota.label(class="form-control-label") }}
                             {% if form_avaliar.nota.errors %}
@@ -132,7 +132,7 @@
                             {% endif %}
                     </div>
 
-                    <!-- Conteudo da avaliação -->
+                    <!-- Текст оценки -->
                     <div class="form-group">
                         {{ form_avaliar.conteudo.label(class="form-control-label") }}
                         {% if form_avaliar.conteudo.errors %}
@@ -149,7 +149,7 @@
 
                 </fieldset>
 
-            <!-- Botão de enviar-->
+            <!-- Кнопка отправки -->
             <div class="row">
                 <div class="form-group col text-right">
                     {{ form_avaliar.botao_avaliar(class="btn btn-success") }}
@@ -158,32 +158,32 @@
 
             </form>
             </fieldset>
-        
+
         </div>
         {% endif %}
 
-    
+
     {% endif %}
 
 
     {% if (avaliacoes.items)|length > 0  or avaliacao_usuario%}
 
-        <!-- Mostrar as avaliações do personagem-->
+        <!-- Отображение оценок сообщества -->
         <fieldset class="justify-content-xl-center">
-        <h2 class="ml-1">Avaliações da comunidade</h2>
+        <h2 class="ml-1">{{ _('Оценки сообщества') }}</h2>
 
         <div class="container-fluid">
             <div class="row">
 
                 {% if avaliacao_usuario %}
 
-                    <div class="container">                
+                    <div class="container">
                         <div class="card p-3">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-2 text-center">
                                         <img src="{{ url_for('static', filename='imagens_perfil/' + avaliacao_usuario.autor.foto) }}" class="img img-rounded img-fluid"/>
-                                        <p class="text-secondary text-center mt-2">Em: {{ avaliacao_usuario.data_postagem.strftime('%d-%m-%Y - %H:%M:%S') }}</p>
+                                        <p class="text-secondary text-center mt-2">{{ _('Дата') }}: {{ avaliacao_usuario.data_postagem.strftime('%d-%m-%Y - %H:%M:%S') }}</p>
                                     </div>
                                     <div class="col-md-10">
                                             <a class="float-left" href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = avaliacao_usuario.autor.id)}}">
@@ -194,10 +194,10 @@
                                                         <span>{{avaliacao_usuario.autor.nome}}</span>
                                             </h2>
                                             </a>
-                                            
+
                                             <br><br>
 
-                                                <!-- Nota da avaliação -->
+                                                <!-- Оценка -->
                                                 <form method="POST" action="" enctype="multipart/form-data">
                                                 {{ form_editar_avaliacao.hidden_tag() }}
                                                 <div class="form-group float-left">
@@ -213,8 +213,8 @@
                                                             {{ form_editar_avaliacao.nota(class="form-control form-control-lg", type="number", min="0.1", max="5", step="0.1" ) }}
                                                         {% endif %}
                                                 </div>
-                                            
-                                            <!-- Conteudo da avaliação -->
+
+                                            <!-- Текст оценки -->
                                             <div class="clearfix"></div>
                                                 {{ form_editar_avaliacao.conteudo.label(class="form-control-label") }}
                                                 {% if form_editar_avaliacao.conteudo.errors %}
@@ -224,7 +224,7 @@
                                                             <span>{{ error }}</span>
                                                         {% endfor %}
                                                     </div>
-                                                    
+
                                                 {% else %}
                                                     {{ form_editar_avaliacao.conteudo(class="form-control form-control-lg", style="height:15em;") }}
                                                 {% endif %}
@@ -232,7 +232,7 @@
 
                                     </div>
 
-                                            <!-- Enviar as modificações caso seja o autor-->
+                                            <!-- Сохранить изменения, если пользователь — автор -->
                                             <div class="text-right mt-4">
                                                     <div class="form-group text-right">
                                                         {{ form_editar_avaliacao.botao_avaliar(class="btn btn-success") }}
@@ -240,48 +240,48 @@
                                             </div>
                                             </form>
 
-                                        <!-- Poder remover caso seja o autor ou admin -->
+                                        <!-- Удалить, если автор или админ -->
                                         <div class="text-right mt-4">
-                                            <button type="button" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#DeleteModal{{avaliacao_usuario.autor.id}}">Apagar</button>
+                                            <button type="button" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#DeleteModal{{avaliacao_usuario.autor.id}}">{{ _('Удалить') }}</button>
                                         </div>
 
-                                        <!-- Modal para apagar uma avaliação-->
+                                        <!-- Модальное окно подтверждения удаления -->
                                         <div class="modal fade" id="DeleteModal{{avaliacao_usuario.autor.id}}" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLongTitle" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="DeleteModalLongTitle">Apagar <span class="modal-nome">avaliação?</span></h5>
-                                                <span class="modal-span">Tem certeza que deseja apagar essa avaliação de <span class="modal-nome">{{avaliacao_usuario.autor.nome}}</span>  do personagem <span class="modal-nome">{{personagem.nome}}?</span>
+                                                <h5 class="modal-title" id="DeleteModalLongTitle">{{ _('Удалить') }} <span class="modal-nome">{{ _('оценку?') }}</span></h5>
+                                                <span class="modal-span">{{ _('Вы действительно хотите удалить оценку от') }} <span class="modal-nome">{{avaliacao_usuario.autor.nome}}</span> {{ _('персонажа') }} <span class="modal-nome">{{personagem.nome}}?</span>
                                             </div>
                                             <div class="modal-body">
-                                                Uma vez apagado, essa avaliação não podera mais ser recuperada!
+                                                {{ _('После удаления восстановить оценку будет невозможно!') }}
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _('Закрыть') }}</button>
                                                 <form action="{{url_for('personagens.apagar_avaliacao', personagem_id = personagem.id, autor_id = avaliacao_usuario.autor.id )}}" method="POST">
-                                                    <input class="btn btn-danger" type="submit" value="Apagar">
+                                                    <input class="btn btn-danger" type="submit" value="{{ _('Удалить') }}">
                                                 </form>
                                             </div>
                                             </div>
                                         </div>
                                         </div>
 
-                                    
-                            </div>   
-                            
+
+                            </div>
+
                         </div>
                     </div>
 
                 {% endif %}
                 {% for avaliacao in avaliacoes.items %}
 
-                    <div class="container">                
+                    <div class="container">
                         <div class="card p-3">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-2 text-center">
                                         <img src="{{ url_for('static', filename='imagens_perfil/' + avaliacao.autor.foto) }}" class="img img-rounded img-fluid"/>
-                                        <p class="text-secondary text-center mt-2">Em: {{ avaliacao.data_postagem.strftime('%d-%m-%Y - %H:%M:%S') }}</p>
+                                        <p class="text-secondary text-center mt-2">{{ _('Дата') }}: {{ avaliacao.data_postagem.strftime('%d-%m-%Y - %H:%M:%S') }}</p>
                                     </div>
                                     <div class="col-md-10">
                                             <a class="float-left" href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = avaliacao.autor.id)}}">
@@ -292,59 +292,59 @@
                                                         <span>{{avaliacao.autor.nome}}</span>
                                             </h2>
                                             </a>
-                                            
+
                                             <br><br>
-                                            <!-- Nota da avaliação -->
-                                            <h2 class="float-left">Nota: <span style="color: #CE0000">{{avaliacao.nota}}</span></h2>
-                                            
-                                        <!-- Conteudo da avaliação -->
+                                            <!-- Оценка -->
+                                            <h2 class="float-left">{{ _('Оценка') }}: <span style="color: #CE0000">{{avaliacao.nota}}</span></h2>
+
+                                        <!-- Текст оценки -->
                                         <div class="clearfix"></div>
                                             <p class="text-justify">{{avaliacao.conteudo}}</p>
                                         </div>
                                     </div>
 
-                                    <!-- Poder remover caso seja admin -->
+                                    <!-- Удалить, если админ -->
                                     {% if current_user.isAdmin %}
                                         <div class="text-right mt-4">
-                                            <button type="button" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#DeleteModal{{avaliacao.autor.id}}">Apagar</button>
+                                            <button type="button" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#DeleteModal{{avaliacao.autor.id}}">{{ _('Удалить') }}</button>
                                         </div>
 
-                                        <!-- Modal para apagar uma avaliação-->
+                                        <!-- Модальное окно подтверждения -->
                                         <div class="modal fade" id="DeleteModal{{avaliacao.autor.id}}" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLongTitle" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="DeleteModalLongTitle">Apagar <span class="modal-nome">avaliação?</span></h5>
-                                                <span class="modal-span">Tem certeza que deseja apagar essa avaliação de <span class="modal-nome">{{avaliacao.autor.nome}}</span>  do personagem <span class="modal-nome">{{personagem.nome}}?</span>
+                                                <h5 class="modal-title" id="DeleteModalLongTitle">{{ _('Удалить') }} <span class="modal-nome">{{ _('оценку?') }}</span></h5>
+                                                <span class="modal-span">{{ _('Вы действительно хотите удалить оценку от') }} <span class="modal-nome">{{avaliacao.autor.nome}}</span> {{ _('персонажа') }} <span class="modal-nome">{{personagem.nome}}?</span>
                                             </div>
                                             <div class="modal-body">
-                                                Uma vez apagado, essa avaliação não podera mais ser recuperada!
+                                                {{ _('После удаления восстановить оценку будет невозможно!') }}
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _('Закрыть') }}</button>
                                                 <form action="{{url_for('personagens.apagar_avaliacao', personagem_id = personagem.id, autor_id = avaliacao.autor.id )}}" method="POST">
-                                                    <input class="btn btn-danger" type="submit" value="Apagar">
+                                                    <input class="btn btn-danger" type="submit" value="{{ _('Удалить') }}">
                                                 </form>
                                             </div>
                                             </div>
                                         </div>
                                         </div>
-                                        
+
                                     {% endif %}
 
-                                    
-                            </div>   
-                            
+
+                            </div>
+
                         </div>
                     </div>
-                    
-                    
+
+
                 {% endfor %}
             </div>
         </div>
-        
 
-            <!-- Botões para a paginação -->
+
+            <!-- Пагинация -->
             <div class="text-center">
                 {% for pagina in avaliacoes.iter_pages(left_edge=3, right_edge=3, left_current=3,right_current=3) %}
                     {% if pagina %}
@@ -361,7 +361,7 @@
 
         </fieldset>
 
-        
+
     {% endif %}
 
 {% endblock content %}

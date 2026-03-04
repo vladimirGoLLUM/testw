@@ -1,0 +1,583 @@
+# Translations template for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-03-04 20:49+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: projeto_rpg/erros/handlers.py:10
+msgid "Доступ запрещён"
+msgstr ""
+
+#: projeto_rpg/erros/handlers.py:11
+msgid "У вас нет прав для просмотра этой страницы."
+msgstr ""
+
+#: projeto_rpg/erros/handlers.py:16
+msgid "Страница не найдена"
+msgstr ""
+
+#: projeto_rpg/erros/handlers.py:17
+msgid "Извините, страница, которую вы ищете, не существует."
+msgstr ""
+
+#: projeto_rpg/erros/handlers.py:22
+msgid "Внутренняя ошибка сервера"
+msgstr ""
+
+#: projeto_rpg/erros/handlers.py:23
+msgid "Что-то пошло не так на сервере. Попробуйте позже."
+msgstr ""
+
+#: projeto_rpg/geral/routes.py:16 projeto_rpg/templates/layout.html:45
+msgid "Главная"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:12 projeto_rpg/usuarios/forms.py:15
+#, python-brace-format
+msgid "Должно быть от {min} до {max} символов"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:15 projeto_rpg/usuarios/forms.py:18
+msgid "Это поле обязательно для заполнения"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:18 projeto_rpg/usuarios/forms.py:21
+#, python-brace-format
+msgid "Значение должно быть между {start} и {end}"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:25 projeto_rpg/personagens/forms.py:94
+msgid "Имя:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:29 projeto_rpg/personagens/forms.py:96
+msgid "Раса:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:33 projeto_rpg/personagens/forms.py:98
+msgid "Класс:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:37
+msgid "Уровень:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:41
+msgid "Сила:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:45
+msgid "Ловкость:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:49
+msgid "Телосложение:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:53
+msgid "Интеллект:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:57
+msgid "Мудрость:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:61
+msgid "Харизма:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:65
+msgid "История:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:67
+msgid "Изображение персонажа:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:68 projeto_rpg/usuarios/forms.py:46
+#: projeto_rpg/usuarios/forms.py:85
+msgid "Разрешены только изображения (JPG, PNG, GIF)"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:71
+msgid "Отправить"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:100
+msgid "Автор:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:102 projeto_rpg/templates/layout.html:46
+msgid "Поиск"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:107
+msgid "Оценка (0–5):"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:111
+msgid "Ваш отзыв:"
+msgstr ""
+
+#: projeto_rpg/personagens/forms.py:114
+msgid "Оценить"
+msgstr ""
+
+#: projeto_rpg/personagens/routes.py:47
+msgid "Персонаж успешно зарегистрирован!"
+msgstr ""
+
+#: projeto_rpg/personagens/routes.py:50 projeto_rpg/templates/home.html:14
+#: projeto_rpg/templates/layout.html:48
+#: projeto_rpg/templates/registrar_personagem.html:9
+msgid "Зарегистрировать персонажа"
+msgstr ""
+
+#: projeto_rpg/personagens/routes.py:97
+msgid "Оценка успешно изменена!"
+msgstr ""
+
+#: projeto_rpg/personagens/routes.py:109
+msgid "Персонаж успешно оценён!"
+msgstr ""
+
+#: projeto_rpg/personagens/routes.py:145
+msgid "Оценка успешно удалена!"
+msgstr ""
+
+#: projeto_rpg/personagens/routes.py:181
+msgid "Персонаж успешно изменён!"
+msgstr ""
+
+#: projeto_rpg/personagens/routes.py:194
+#: projeto_rpg/templates/editar_personagem.html:8
+msgid "Редактировать персонажа"
+msgstr ""
+
+#: projeto_rpg/personagens/routes.py:217
+msgid "Персонаж успешно удалён!"
+msgstr ""
+
+#: projeto_rpg/personagens/routes.py:240
+#: projeto_rpg/templates/procurar_personagem.html:8
+msgid "Поиск персонажа"
+msgstr ""
+
+#: projeto_rpg/templates/alterar_senha.html:10
+#: projeto_rpg/templates/perfil_usuario.html:19
+#: projeto_rpg/usuarios/routes.py:189
+msgid "Изменить пароль"
+msgstr ""
+
+#: projeto_rpg/templates/editar_personagem.html:194
+#: projeto_rpg/usuarios/forms.py:87
+msgid "Сохранить изменения"
+msgstr ""
+
+#: projeto_rpg/templates/home.html:8
+msgid "Проект RPG"
+msgstr ""
+
+#: projeto_rpg/templates/home.html:10
+msgid "Сайт"
+msgstr ""
+
+#: projeto_rpg/templates/home.html:10
+msgid ""
+"разработан для того, чтобы игроки в настольные ролевые игры могли легко "
+"регистрировать, хранить и обновлять данные своих персонажей, а также "
+"делиться ими с друзьями и сообществом."
+msgstr ""
+
+#: projeto_rpg/templates/home.html:13
+msgid "Найти персонажа"
+msgstr ""
+
+#: projeto_rpg/templates/home.html:19
+msgid "Последние зарегистрированные персонажи"
+msgstr ""
+
+#: projeto_rpg/templates/home.html:27
+#: projeto_rpg/templates/perfil_usuario.html:124
+#: projeto_rpg/templates/personagem.html:27
+#: projeto_rpg/templates/procurar_personagem.html:75
+msgid "Раса"
+msgstr ""
+
+#: projeto_rpg/templates/home.html:28
+#: projeto_rpg/templates/perfil_usuario.html:125
+#: projeto_rpg/templates/personagem.html:28
+#: projeto_rpg/templates/procurar_personagem.html:76
+msgid "Класс"
+msgstr ""
+
+#: projeto_rpg/templates/home.html:31
+#: projeto_rpg/templates/perfil_usuario.html:128
+#: projeto_rpg/templates/personagem.html:29
+#: projeto_rpg/templates/procurar_personagem.html:79
+msgid "Уровень"
+msgstr ""
+
+#: projeto_rpg/templates/home.html:35
+#: projeto_rpg/templates/perfil_usuario.html:132
+#: projeto_rpg/templates/personagem.html:12
+#: projeto_rpg/templates/procurar_personagem.html:81
+msgid "Создано"
+msgstr ""
+
+#: projeto_rpg/templates/home.html:37
+#: projeto_rpg/templates/perfil_usuario.html:134
+#: projeto_rpg/templates/personagem.html:16
+#: projeto_rpg/templates/procurar_personagem.html:85
+msgid "Ещё не"
+msgstr ""
+
+#: projeto_rpg/templates/home.html:37
+#: projeto_rpg/templates/perfil_usuario.html:134
+#: projeto_rpg/templates/personagem.html:16
+#: projeto_rpg/templates/procurar_personagem.html:85
+msgid "оценено сообществом!"
+msgstr ""
+
+#: projeto_rpg/templates/home.html:39
+#: projeto_rpg/templates/perfil_usuario.html:136
+#: projeto_rpg/templates/procurar_personagem.html:83
+msgid "Оценка сообщества"
+msgstr ""
+
+#: projeto_rpg/templates/home.html:41
+#: projeto_rpg/templates/perfil_usuario.html:138
+#: projeto_rpg/templates/personagem.html:13
+#: projeto_rpg/templates/procurar_personagem.html:87
+msgid "Дата создания"
+msgstr ""
+
+#: projeto_rpg/templates/layout.html:8
+msgid ""
+"Сайт с простой и удобной системой регистрации и редактирования персонажей"
+" в настольных RPG"
+msgstr ""
+
+#: projeto_rpg/templates/layout.html:38
+msgid "Переключить меню"
+msgstr ""
+
+#: projeto_rpg/templates/layout.html:56
+msgid "Выйти"
+msgstr ""
+
+#: projeto_rpg/templates/layout.html:58 projeto_rpg/usuarios/routes.py:65
+msgid "Вход"
+msgstr ""
+
+#: projeto_rpg/templates/layout.html:59 projeto_rpg/usuarios/routes.py:41
+msgid "Регистрация"
+msgstr ""
+
+#: projeto_rpg/templates/layout.html:76
+msgid "Вы должны войти в систему, чтобы получить доступ к этой странице!"
+msgstr ""
+
+#: projeto_rpg/templates/logar_usuario.html:10
+msgid "Войти в аккаунт"
+msgstr ""
+
+#: projeto_rpg/templates/logar_usuario.html:57
+msgid "Забыли свой пароль?"
+msgstr ""
+
+#: projeto_rpg/templates/logar_usuario.html:65
+msgid "Ещё не зарегистрированы?"
+msgstr ""
+
+#: projeto_rpg/templates/logar_usuario.html:65
+msgid "Зарегистрируйтесь сейчас!"
+msgstr ""
+
+#: projeto_rpg/templates/perfil_usuario.html:15
+msgid "Участник с"
+msgstr ""
+
+#: projeto_rpg/templates/perfil_usuario.html:30
+msgid "Редактировать данные пользователя"
+msgstr ""
+
+#: projeto_rpg/templates/perfil_usuario.html:87
+msgid "Удалить аккаунт"
+msgstr ""
+
+#: projeto_rpg/templates/perfil_usuario.html:95
+#: projeto_rpg/templates/perfil_usuario.html:104
+#: projeto_rpg/templates/personagem.html:79
+#: projeto_rpg/templates/personagem.html:86
+#: projeto_rpg/templates/personagem.html:95
+#: projeto_rpg/templates/personagem.html:245
+#: projeto_rpg/templates/personagem.html:253
+#: projeto_rpg/templates/personagem.html:262
+#: projeto_rpg/templates/personagem.html:309
+#: projeto_rpg/templates/personagem.html:317
+#: projeto_rpg/templates/personagem.html:326
+msgid "Удалить"
+msgstr ""
+
+#: projeto_rpg/templates/perfil_usuario.html:96
+msgid "Вы действительно хотите удалить этого пользователя и всех его персонажей?"
+msgstr ""
+
+#: projeto_rpg/templates/perfil_usuario.html:99
+msgid "После удаления восстановить аккаунт и персонажей будет невозможно!"
+msgstr ""
+
+#: projeto_rpg/templates/perfil_usuario.html:102
+#: projeto_rpg/templates/personagem.html:93
+#: projeto_rpg/templates/personagem.html:260
+#: projeto_rpg/templates/personagem.html:324
+msgid "Закрыть"
+msgstr ""
+
+#: projeto_rpg/templates/perfil_usuario.html:117
+msgid "Персонажи, зарегистрированные пользователем"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:18
+#: projeto_rpg/templates/personagem.html:298
+msgid "Оценка"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:36
+msgid "Сила"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:41
+msgid "Ловкость"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:45
+msgid "Телосложение"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:49
+msgid "Интеллект"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:54
+msgid "Мудрость"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:59
+msgid "Харизма"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:78
+msgid "Редактировать"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:87
+msgid "Вы действительно хотите удалить этого персонажа?"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:90
+msgid "После удаления восстановить персонаж будет невозможно!"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:118
+msgid "Оценить персонажа"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:173
+msgid "Оценки сообщества"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:186
+#: projeto_rpg/templates/personagem.html:284
+msgid "Дата"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:253
+#: projeto_rpg/templates/personagem.html:317
+msgid "оценку?"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:254
+#: projeto_rpg/templates/personagem.html:318
+msgid "Вы действительно хотите удалить оценку от"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:254
+#: projeto_rpg/templates/personagem.html:318
+msgid "персонажа"
+msgstr ""
+
+#: projeto_rpg/templates/personagem.html:257
+#: projeto_rpg/templates/personagem.html:321
+msgid "После удаления восстановить оценку будет невозможно!"
+msgstr ""
+
+#: projeto_rpg/templates/procurar_personagem.html:68
+msgid "Найденные персонажи"
+msgstr ""
+
+#: projeto_rpg/templates/registrar_personagem.html:195
+msgid "Зарегистрировать"
+msgstr ""
+
+#: projeto_rpg/templates/registrar_usuario.html:10
+msgid "Зарегистрировать нового пользователя"
+msgstr ""
+
+#: projeto_rpg/templates/registrar_usuario.html:92
+msgid "Уже есть аккаунт?"
+msgstr ""
+
+#: projeto_rpg/templates/registrar_usuario.html:92
+#: projeto_rpg/usuarios/forms.py:71
+msgid "Войти"
+msgstr ""
+
+#: projeto_rpg/templates/requisitar_recuperacao.html:9
+msgid "Запросить восстановление аккаунта"
+msgstr ""
+
+#: projeto_rpg/templates/erros/erro_403.html:6
+#: projeto_rpg/templates/erros/erro_404.html:6
+#: projeto_rpg/templates/erros/erro_500.html:6
+msgid "Вернуться на главную"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:28 projeto_rpg/usuarios/forms.py:61
+msgid "Имя пользователя:"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:32
+msgid "Электронная почта:"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:34 projeto_rpg/usuarios/forms.py:82
+#: projeto_rpg/usuarios/forms.py:104
+msgid "Введите действительный адрес электронной почты"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:36 projeto_rpg/usuarios/forms.py:65
+#: projeto_rpg/usuarios/forms.py:115
+msgid "Пароль:"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:40 projeto_rpg/usuarios/forms.py:119
+msgid "Подтвердите пароль:"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:43 projeto_rpg/usuarios/forms.py:122
+msgid "Пароли должны совпадать"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:45 projeto_rpg/usuarios/forms.py:84
+msgid "Изменить фото профиля:"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:48
+msgid "Зарегистрироваться"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:52 projeto_rpg/usuarios/forms.py:92
+msgid "Имя пользователя уже занято. Пожалуйста, выберите другое."
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:56 projeto_rpg/usuarios/forms.py:97
+msgid "Электронная почта уже используется. Пожалуйста, используйте другую."
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:69
+msgid "Оставаться в системе"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:76
+msgid "Новое имя пользователя:"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:80
+msgid "Новая электронная почта:"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:102
+msgid "Электронная почта аккаунта:"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:106
+msgid "Запросить"
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:110
+msgid "Этот адрес электронной почты не зарегистрирован. Попробуйте другой."
+msgstr ""
+
+#: projeto_rpg/usuarios/forms.py:124
+msgid "Изменить"
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:37
+#, python-brace-format
+msgid "{name}, ваш аккаунт успешно зарегистрирован!"
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:59
+msgid "Вход выполнен успешно"
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:62
+msgid "Ошибка входа. Проверьте имя пользователя и пароль."
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:73
+msgid "Вы вышли из системы"
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:97
+msgid "Данные аккаунта обновлены!"
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:133
+msgid "Аккаунт удалён"
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:140
+msgid "Запрос на смену пароля"
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:143
+msgid "Чтобы сбросить пароль, перейдите по ссылке:"
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:145
+msgid "Если вы не запрашивали смену пароля — проигнорируйте это письмо."
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:161
+msgid "На ваш email отправлены инструкции по восстановлению пароля."
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:165
+msgid "Восстановление пароля"
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:177
+msgid "Ссылка недействительна или устарела."
+msgstr ""
+
+#: projeto_rpg/usuarios/routes.py:185
+#, python-brace-format
+msgid "{name}, ваш пароль успешно изменён!"
+msgstr ""
+

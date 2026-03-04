@@ -1,73 +1,71 @@
 {% extends "layout.html" %}
 {% block content %}
 
-        <div class="d-flex justify-content-center h-100">
-		    <div class="card p-4" style="min-width: 60%">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card p-4" style="min-width: 60%">
 
-                <form method="POST" action="">
-                    {{ form_logar_usuario.hidden_tag() }}
-                    <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">Logar usuário</legend>
+            <form method="POST" action="">
+                {{ form_logar_usuario.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">{{ _('Войти в аккаунт') }}</legend>
 
-                        <!-- Nome de usuário-->
-                        <div class="form-group">
-                            {{ form_logar_usuario.nome.label(class="form-control-label") }}
-                            {% if form_logar_usuario.nome.errors %}
-                                {{ form_logar_usuario.nome(class="form-control form-control-lg is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form_logar_usuario.nome.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form_logar_usuario.nome(class="form-control form-control-lg") }}
-                            {% endif %}
-                        </div>
-
-                        <!-- Senha do usuário-->
-                        <div class="form-group">
-                            {{ form_logar_usuario.senha.label(class="form-control-label") }}
-                            {% if form_logar_usuario.senha.errors %}
-                                {{ form_logar_usuario.senha(class="form-control form-control-lg is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form_logar_usuario.senha.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form_logar_usuario.senha(class="form-control form-control-lg") }}
-                            {% endif %}
-                        </div>
-
-                        <!-- Manter logado -->
-                        <div class="form-check">
-                            {{ form_logar_usuario.permanecer_logado(class="form-check-input") }}
-                            {{ form_logar_usuario.permanecer_logado.label(class="form-check-label") }}
-                        </div>
-                    </fieldset>
-
-                    <!-- Enviar -->
-                    <div class="form-group text-right">
-                        {{ form_logar_usuario.botao_logar(class="btn btn-success") }}
+                    <!-- Имя пользователя -->
+                    <div class="form-group">
+                        {{ form_logar_usuario.nome.label(class="form-control-label") }}
+                        {% if form_logar_usuario.nome.errors %}
+                            {{ form_logar_usuario.nome(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form_logar_usuario.nome.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_logar_usuario.nome(class="form-control form-control-lg") }}
+                        {% endif %}
                     </div>
 
-                    <!-- Recuperação de senha -->
-                    <div class="pt-3">
-                        <span class="text-muted">
-                            <a href="{{ url_for('requisitar_recuperacao')}}">Esqueceu o seu login?</a>
-                        </span>
+                    <!-- Пароль пользователя -->
+                    <div class="form-group">
+                        {{ form_logar_usuario.senha.label(class="form-control-label") }}
+                        {% if form_logar_usuario.senha.errors %}
+                            {{ form_logar_usuario.senha(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form_logar_usuario.senha.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_logar_usuario.senha(class="form-control form-control-lg") }}
+                        {% endif %}
                     </div>
-                </form>
 
-                <!-- Criar uma nova conta caso não possua ainda-->
-                <div class="border-bottom pt-3">
+                    <!-- Оставаться в системе -->
+                    <div class="form-check">
+                        {{ form_logar_usuario.permanecer_logado(class="form-check-input") }}
+                        {{ form_logar_usuario.permanecer_logado.label(class="form-check-label") }}
+                    </div>
+                </fieldset>
+
+                <!-- Отправить -->
+                <div class="form-group text-right">
+                    {{ form_logar_usuario.botao_logar(class="btn btn-success") }}
+                </div>
+
+                <!-- Восстановление пароля -->
+                <div class="pt-3">
                     <span class="text-muted">
-                        Ainda não possui uma conta? <a class="ml-2" href="{{ url_for('usuarios.registrar_usuario') }}">Registre-se agora mesmo!</a>
+                        <a href="{{ url_for('usuarios.requisitar_recuperacao') }}">{{ _('Забыли свой пароль?') }}</a>
                     </span>
                 </div>
+            </form>
+
+            <!-- Создать новый аккаунт -->
+            <div class="border-bottom pt-3">
+                <span class="text-muted">
+                    {{ _('Ещё не зарегистрированы?') }} <a class="ml-2" href="{{ url_for('usuarios.registrar_usuario') }}">{{ _('Зарегистрируйтесь сейчас!') }}</a>
+                </span>
             </div>
         </div>
-
-
+    </div>
 
 {% endblock content %}

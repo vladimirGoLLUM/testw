@@ -6,9 +6,9 @@
         <form method="POST" action="" enctype="multipart/form-data">
             {{ form_personagem.hidden_tag() }}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Registrar Personagem</legend>
+                <legend class="border-bottom mb-4">{{ _('Зарегистрировать персонажа') }}</legend>
 
-                <!-- Nome do personagem-->
+                <!-- Nome do personagem -->
                 <div class="form-group row pr-3 pl-3">
                     {{ form_personagem.nome.label(class="form-control-label") }}
                     {% if form_personagem.nome.errors %}
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="row">
-                    <!-- Raça do personagem-->
+                    <!-- Raça do personagem -->
                     <div class="form-group col-sm-6">
                         {{ form_personagem.raca.label(class="form-control-label") }}
                         {% if form_personagem.raca.errors %}
@@ -39,7 +39,7 @@
                         {% endif %}
                     </div>
 
-                    <!-- Classe do personagem-->
+                    <!-- Classe do personagem -->
                     <div class="form-group col-sm-6">
                         {{ form_personagem.classe.label(class="form-control-label") }}
                         {% if form_personagem.classe.errors %}
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <!-- Nível do personagem-->
+                <!-- Nível do personagem -->
                 <div class="form-group">
                     {{ form_personagem.nivel.label(class="form-control-label", type="number", min="1", max="99") }}
                     {% if form_personagem.nivel.errors %}
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="row">
-                    <!-- Força-->
+                    <!-- Força -->
                     <div class="form-group col-sm-4">
                         {{ form_personagem.forca.label(class="form-control-label", type="number", min="1", max="99") }}
                         {% if form_personagem.forca.errors %}
@@ -115,10 +115,10 @@
                             {{ form_personagem.constituicao(class="form-control form-control-lg ", type="number", min="1", max="99") }}
                         {% endif %}
                     </div>
-
                 </div>
+
                 <div class="row">
-                <!-- Inteligencia -->
+                    <!-- Inteligencia -->
                     <div class="form-group col-sm-4">
                         {{ form_personagem.inteligencia.label(class="form-control-label ", type="number", min="1", max="99") }}
                         {% if form_personagem.inteligencia.errors %}
@@ -177,7 +177,6 @@
                     {% else %}
                         {{ form_personagem.historia(class="form-control form-control-lg") }}
                     {% endif %}
-                
                 </div>
 
                 <!-- Foto de referência -->
@@ -185,20 +184,19 @@
                     {{ form_personagem.foto_referencia.label() }}
                     {{ form_personagem.foto_referencia(class='form-control-file') }}
                     {% if form_personagem.foto_referencia.errors %}
-                            {% for error in form_personagem.foto_referencia.errors %}
-                                <span class='text-danger'>{{ error }}</span></br>
-                            {% endfor %}
+                        {% for error in form_personagem.foto_referencia.errors %}
+                            <span class='text-danger'>{{ error }}</span><br>
+                        {% endfor %}
                     {% endif %}
                 </div>
 
                 <!-- Enviar -->
                 <div class="form-group text-right">
-                    {{ form_personagem.botao_enviar(class="btn btn-success") }}
+                    {{ form_personagem.botao_enviar(class="btn btn-success", value=_('Зарегистрировать')) }}
                 </div>
 
             </fieldset>
         </form>
     </div>
-
 
 {% endblock content %}

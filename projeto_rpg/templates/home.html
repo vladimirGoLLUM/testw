@@ -1,48 +1,50 @@
 {% extends "layout.html" %}
-  {% block content %}
+{% block content %}
 
-    <div class="container-fluid">
+  <div class="container-fluid">
 
-      <section class="jumbotron text-center p-5">
-        <div class="container">
-            <h1 class="jumbotron-heading mb-4">Проект RPG</h1>
-            <p class="lead text-muted mb-5">Сайт <span color="#9F0000">Проект RPG</span> разработан для того, чтобы игроки в настольные ролевые игры могли легко регистрировать, хранить и обновлять данные своих персонажей, а также делиться ими с друзьями и сообществом.</p>
-          <div class="row">
-            <a href="{{url_for('personagens.procurar_personagem')}}" class="btn-lg col btn-primary p-3 mr-3 ml-3 mb-4">Найти персонажа</a>
-            <a href="{{url_for('personagens.registrar_personagem')}}" class="btn-lg col btn-primary p-3 mr-3 ml-3 mb-4">Зарегистрировать персонажа</a>
-          </div>
+    <section class="jumbotron text-center p-5">
+      <div class="container">
+        <h1 class="jumbotron-heading mb-4">{{ _('Проект RPG') }}</h1>
+        <p class="lead text-muted mb-5">
+          {{ _('Сайт') }} <span style="color: #9F0000">Проект RPG</span> {{ _('разработан для того, чтобы игроки в настольные ролевые игры могли легко регистрировать, хранить и обновлять данные своих персонажей, а также делиться ими с друзьями и сообществом.') }}
+        </p>
+        <div class="row">
+          <a href="{{ url_for('personagens.procurar_personagem') }}" class="btn-lg col btn-primary p-3 mr-3 ml-3 mb-4">{{ _('Найти персонажа') }}</a>
+          <a href="{{ url_for('personagens.registrar_personagem') }}" class="btn-lg col btn-primary p-3 mr-3 ml-3 mb-4">{{ _('Зарегистрировать персонажа') }}</a>
         </div>
-      </section>
-
-      <h2 class="ml-1 text-center mb-3">Последние зарегистрированные персонажи</h2>
-      <div class="row pl-3" style="margin: 0 auto;">
-
-        {% for personagem in personagens %}
-
-          <card class="content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1" style="max-width: 340px; min-width: 310px; text-align: center;" >
-            <div class="media-body">
-              <div class="article-metadata">
-                <span>Раса: {{ personagem.raca }}</span>
-                <small class="text-muted">Класс: {{ personagem.classe }}</small>
-              </div>
-              <h2><a class="article-title" href="{{url_for('personagens.mostrar_personagem', personagem_id=personagem.id)}}">{{ personagem.nome }}</a></h2>
-              <p class="article-content">Уровень: {{ personagem.nivel }}</p>
-              <a href="{{url_for('personagens.mostrar_personagem', personagem_id=personagem.id)}}">
-                <img class="account-img" src="{{ url_for('static', filename='imagens_personagens/' + personagem.foto) }}">
-              </a>
-              <p class="article-content">Создано: <a href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = personagem.autor.id)}}">{{ personagem.autor.nome }}</a></p>
-              {% if personagem.nota == None %}
-                <p class="article-content"><span class="fonte_mec", style="color: #CE0000">Ещё не</span> оценено сообществом!</p>
-              {% else %}
-                <p class="article-content">Оценка сообщества: <span class="fonte_mec", style="color: #CE0000">{{personagem.nota}}</span></p>
-              {% endif %}
-              <small class="text-muted">Дата создания: {{ personagem.data_criacao.strftime('%d-%m-%Y') }}</small>
-            </div>
-          </card>
-
-        {% endfor %}
-
       </div>
-    </div>
+    </section>
 
-  {% endblock content %}
+    <h2 class="ml-1 text-center mb-3">{{ _('Последние зарегистрированные персонажи') }}</h2>
+    <div class="row pl-3" style="margin: 0 auto;">
+
+      {% for personagem in personagens %}
+
+        <card class="content-section col-md-4 mb-4 pr-0 m-1 pl-3 pr-3 personagem1" style="max-width: 340px; min-width: 310px; text-align: center;">
+          <div class="media-body">
+            <div class="article-metadata">
+              <span>{{ _('Раса') }}: {{ personagem.raca }}</span>
+              <small class="text-muted">{{ _('Класс') }}: {{ personagem.classe }}</small>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('personagens.mostrar_personagem', personagem_id=personagem.id) }}">{{ personagem.nome }}</a></h2>
+            <p class="article-content">{{ _('Уровень') }}: {{ personagem.nivel }}</p>
+            <a href="{{ url_for('personagens.mostrar_personagem', personagem_id=personagem.id) }}">
+              <img class="account-img" src="{{ url_for('static', filename='imagens_personagens/' + personagem.foto) }}">
+            </a>
+            <p class="article-content">{{ _('Создано') }}: <a href="{{ url_for('usuarios.mostrar_perfil_usuario', usuario_id=personagem.autor.id) }}">{{ personagem.autor.nome }}</a></p>
+            {% if personagem.nota == None %}
+              <p class="article-content"><span class="fonte_mec" style="color: #CE0000">{{ _('Ещё не') }}</span> {{ _('оценено сообществом!') }}</p>
+            {% else %}
+              <p class="article-content">{{ _('Оценка сообщества') }}: <span class="fonte_mec" style="color: #CE0000">{{ personagem.nota }}</span></p>
+            {% endif %}
+            <small class="text-muted">{{ _('Дата создания') }}: {{ personagem.data_criacao.strftime('%d-%m-%Y') }}</small>
+          </div>
+        </card>
+
+      {% endfor %}
+
+    </div>
+  </div>
+
+{% endblock content %}
