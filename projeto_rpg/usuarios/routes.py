@@ -2,9 +2,15 @@ from flask import Blueprint
 
 usuarios = Blueprint('usuarios', __name__)
 
+# Все импорты ПОСЛЕ создания Blueprint
 from flask import render_template, url_for, flash, redirect, request, abort
-from projeto_rpg.usuarios.forms import (Form_Registrar_Usuario, Form_Logar_Usuario, Form_Editar_Conta,
-                                        Form_Requisitar_Recuperacao, Form_Alterar_Senha)
+from projeto_rpg.usuarios.forms import (
+    Form_Registrar_Usuario,
+    Form_Logar_Usuario,
+    Form_Editar_Conta,
+    Form_Requisitar_Recuperacao,
+    Form_Alterar_Senha
+)
 from projeto_rpg.models_db import Usuario, Personagem
 from projeto_rpg import app, db, bcrypt, mail
 from flask_login import login_user, logout_user, current_user, login_required
@@ -41,8 +47,6 @@ def registrar_usuario():
                            titulo=_('Регистрация'),
                            form_registrar_usuario=form_registrar_usuario)
 
-
-# Rota para login de usuários
 @usuarios.route("/logar_usuario", methods=['GET', 'POST'])
 def logar_usuario():
     if current_user.is_authenticated:
@@ -53,18 +57,25 @@ def logar_usuario():
     if form_logar_usuario.validate_on_submit():
         usuario = Usuario.query.filter_by(nome=form_logar_usuario.nome.data).first()
 
+        # 🔴 Отладка (можно убрать позже)
+        if usuario:
+            print(f"✅ Найден пользователь: {usuario.nome}")
+            print(f"🔍 Хэш пароля из БД: {usuario.senha}")
+            print(f"🔑 Введённый пароль: {form_logar_usuario.senha.data}")
+            print(f"🧩 Проверка хэша: {bcrypt.check_password_hash(usuario.senha, form_logar_usuario.senha.data)}")
+        else:
+            print("❌ Пользователь не найден")
+
         if usuario and bcrypt.check_password_hash(usuario.senha, form_logar_usuario.senha.data):
             login_user(usuario, remember=form_logar_usuario.permanecer_logado.data)
-            acessar_pagina = request.args.get('next')
             flash(_('Вход выполнен успешно'), 'success')
-            return redirect(acessar_pagina) if acessar_pagina else redirect(url_for('geral.mostrar_home'))
+            return redirect(request.args.get('next') or url_for('geral.mostrar_home'))
         else:
             flash(_('Ошибка входа. Проверьте имя пользователя и пароль.'), 'danger')
 
     return render_template('logar_usuario.html',
                            titulo=_('Вход'),
                            form_logar_usuario=form_logar_usuario)
-
 
 # Rota для deslogar usuários
 @usuarios.route("/deslogar_usuario")

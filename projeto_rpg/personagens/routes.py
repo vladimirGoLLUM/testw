@@ -1,20 +1,16 @@
-from flask import Blueprint
-
-# Definição da Blueprint
-personagens = Blueprint('personagens', __name__)
-
-from flask import render_template, url_for, flash, redirect, request, abort
-from projeto_rpg.personagens.forms import (Form_Personagem, Form_Procurar_Personagem,
-                                           Form_Avaliar_Personagem)
+from flask import Blueprint, render_template, url_for, flash, redirect, request, abort
+from projeto_rpg.personagens.forms import Form_Personagem, Form_Procurar_Personagem, Form_Avaliar_Personagem
 from projeto_rpg.models_db import Personagem, Avaliacao
 from projeto_rpg import app, db
 from flask_login import current_user, login_required
 from projeto_rpg.geral.routes import salvar_imagem, apagar_imagem
 from datetime import datetime
-from flask_babel import _  # Импортируем функцию перевода
+from flask_babel import _
 
 
-# Rota para registrar personagens
+personagens = Blueprint('personagens', __name__)
+
+
 @personagens.route("/registrar_personagem", methods=['GET', 'POST'])
 @login_required
 def registrar_personagem():
@@ -22,8 +18,7 @@ def registrar_personagem():
 
     if form_personagem.validate_on_submit():
         if form_personagem.foto_referencia.data:
-            picture_file = salvar_imagem(
-                'static/imagens_personagens', form_personagem.foto_referencia.data)
+            picture_file = salvar_imagem('static/imagens_personagens', form_personagem.foto_referencia.data)
             form_personagem.foto_referencia.data = picture_file
 
         novo_personagem = Personagem(
@@ -47,11 +42,11 @@ def registrar_personagem():
         flash(_('Персонаж успешно зарегистрирован!'), 'success')
         return redirect(url_for('geral.mostrar_home'))
 
-    return render_template('registrar_personagem.html', titulo=_('Зарегистрировать персонажа'),
+    return render_template('registrar_personagem.html',
+                           titulo=_('Зарегистрировать персонажа'),
                            form_personagem=form_personagem)
 
 
-# Rota para vizualizar um personagem
 @personagens.route("/personagem/<int:personagem_id>", methods=['GET', 'POST'])
 def mostrar_personagem(personagem_id):
     pagina = request.args.get('pagina', 1, type=int)
@@ -59,7 +54,7 @@ def mostrar_personagem(personagem_id):
 
     if current_user.is_authenticated:
         avaliacoes = Avaliacao.query.filter(
-            Avaliacao.autor_id.isnot(current_user.id),
+            Avaliacao.autor_id != current_user.id,
             Avaliacao.personagem_id == personagem_id
         ).paginate(page=pagina, per_page=6)
         avaliacao_usuario = Avaliacao.query.filter_by(
@@ -69,20 +64,15 @@ def mostrar_personagem(personagem_id):
         avaliacoes = Avaliacao.query.filter_by(
             personagem_id=personagem_id).paginate(page=pagina, per_page=6)
 
-    # Atualiza a nota do personagem
-    lista_notas = []
-    nota = 0
-    for avaliacao in avaliacoes.items:
-        lista_notas.append(avaliacao.nota)
-        nota += avaliacao.nota
+    # ✅ Правильный расчёт средней оценки
+    notas = [a.nota for a in avaliacoes.items]
     if avaliacao_usuario:
-        lista_notas.append(avaliacao_usuario.nota)
-        nota += avaliacao_usuario.nota
+        notas.append(avaliacao_usuario.nota)
 
-    if len(lista_notas) == 0:
-        personagem.nota = None
+    if notas:
+        personagem.nota = round(sum(notas) / len(notas), 2)
     else:
-        personagem.nota = round((nota / len(lista_notas)), 2)
+        personagem.nota = None
 
     db.session.commit()
 
@@ -90,7 +80,7 @@ def mostrar_personagem(personagem_id):
     form_editar_avaliacao = Form_Avaliar_Personagem()
 
     if avaliacao_usuario and form_editar_avaliacao.validate_on_submit():
-        avaliacao_usuario.data_postagem = datetime.now()
+        avaliacao_usuario.data_postagem = datetime.now(timezone.utc)
         avaliacao_usuario.conteudo = form_editar_avaliacao.conteudo.data
         avaliacao_usuario.nota = form_editar_avaliacao.nota.data
         db.session.commit()
@@ -98,13 +88,13 @@ def mostrar_personagem(personagem_id):
         return redirect(url_for('personagens.mostrar_personagem', personagem_id=personagem.id))
 
     elif form_avaliar.validate_on_submit():
-        nova_avalicao = Avaliacao(
+        nova_avaliacao = Avaliacao(
             autor_id=current_user.id,
             personagem_id=personagem_id,
             conteudo=form_avaliar.conteudo.data,
             nota=form_avaliar.nota.data
         )
-        db.session.add(nova_avalicao)
+        db.session.add(nova_avaliacao)
         db.session.commit()
         flash(_('Персонаж успешно оценён!'), 'success')
         return redirect(url_for('personagens.mostrar_personagem', personagem_id=personagem.id))
@@ -124,35 +114,34 @@ def mostrar_personagem(personagem_id):
     )
 
 
-# Rota para apagar um personagem
 @personagens.route("/personagem/<int:personagem_id>/apagar_avaliacao/<int:autor_id>", methods=['POST'])
 @login_required
 def apagar_avaliacao(personagem_id, autor_id):
     avaliacao = Avaliacao.query.get_or_404((autor_id, personagem_id))
-    avaliacoes = Avaliacao.query.filter_by(personagem_id=personagem_id)
     personagem = Personagem.query.get_or_404(personagem_id)
 
-    if (avaliacao.autor != current_user) and not (current_user.isAdmin):
+    if (avaliacao.autor != current_user) and not current_user.isAdmin:
         abort(403)
-
-    if avaliacoes.count() == 1:
-        personagem.nota = None
-    else:
-        personagem.nota = ((personagem.nota) * 2) - avaliacao.nota
 
     db.session.delete(avaliacao)
     db.session.commit()
+
+    # ✅ Пересчитываем оценку
+    todas_aval = Avaliacao.query.filter_by(personagem_id=personagem_id).all()
+    notas = [a.nota for a in todas_aval]
+    personagem.nota = round(sum(notas) / len(notas), 2) if notas else None
+    db.session.commit()
+
     flash(_('Оценка успешно удалена!'), 'success')
     return redirect(url_for('personagens.mostrar_personagem', personagem_id=personagem_id))
 
 
-# Rota para editar um personagem
 @personagens.route("/personagem/<int:personagem_id>/editar", methods=['GET', 'POST'])
 @login_required
 def editar_personagem(personagem_id):
     personagem = Personagem.query.get_or_404(personagem_id)
 
-    if (personagem.autor != current_user) and not (current_user.isAdmin):
+    if (personagem.autor != current_user) and not current_user.isAdmin:
         abort(403)
 
     form_editar = Form_Personagem()
@@ -173,8 +162,7 @@ def editar_personagem(personagem_id):
         if form_editar.foto_referencia.data:
             if personagem.foto != 'personagem.png':
                 apagar_imagem('static/imagens_personagens', personagem.foto)
-            picture_file = salvar_imagem(
-                'static/imagens_personagens', form_editar.foto_referencia.data)
+            picture_file = salvar_imagem('static/imagens_personagens', form_editar.foto_referencia.data)
             personagem.foto = picture_file
 
         db.session.commit()
@@ -182,12 +170,18 @@ def editar_personagem(personagem_id):
         return redirect(url_for('personagens.mostrar_personagem', personagem_id=personagem.id))
 
     elif request.method == "GET":
-        form_editar = Form_Personagem(
-            personagem.nome, personagem.raca, personagem.classe, personagem.nivel,
-            personagem.forca, personagem.destreza, personagem.constituicao,
-            personagem.inteligencia, personagem.sabedoria, personagem.carisma,
-            personagem.historia
-        )
+        # ✅ Правильное заполнение формы
+        form_editar.nome.data = personagem.nome
+        form_editar.raca.data = personagem.raca
+        form_editar.classe.data = personagem.classe
+        form_editar.nivel.data = personagem.nivel
+        form_editar.forca.data = personagem.forca
+        form_editar.destreza.data = personagem.destreza
+        form_editar.constituicao.data = personagem.constituicao
+        form_editar.inteligencia.data = personagem.inteligencia
+        form_editar.sabedoria.data = personagem.sabedoria
+        form_editar.carisma.data = personagem.carisma
+        form_editar.historia.data = personagem.historia
 
     return render_template(
         'editar_personagem.html',
@@ -197,12 +191,11 @@ def editar_personagem(personagem_id):
     )
 
 
-# Rota para apagar um personagem
 @personagens.route("/personagem/<int:personagem_id>/apagar", methods=['POST'])
 @login_required
 def apagar_personagem(personagem_id):
     personagem = Personagem.query.get_or_404(personagem_id)
-    if (personagem.autor != current_user) and not (current_user.isAdmin):
+    if (personagem.autor != current_user) and not current_user.isAdmin:
         abort(403)
 
     avaliacoes = Avaliacao.query.filter_by(personagem_id=personagem_id)
@@ -218,7 +211,6 @@ def apagar_personagem(personagem_id):
     return redirect(url_for('geral.mostrar_home'))
 
 
-# Rota para a pesquisa de personagem
 @personagens.route("/procurar_personagem/", methods=['GET', 'POST'])
 def procurar_personagem():
     pagina = request.args.get('pagina', 1, type=int)
@@ -226,14 +218,12 @@ def procurar_personagem():
 
     if form_procurar_pers.validate_on_submit():
         personagens = db.session.query(Personagem).filter(
-            Personagem.nome.like(f"%{form_procurar_pers.nome.data}%"),
-            Personagem.raca.like(f"%{form_procurar_pers.raca.data}%"),
-            Personagem.classe.like(f"%{form_procurar_pers.classe.data}%"),
-        ).from_self().paginate(page=1, per_page=9)
+            Personagem.nome.ilike(f"%{form_procurar_pers.nome.data}%"),
+            Personagem.raca.ilike(f"%{form_procurar_pers.raca.data}%"),
+            Personagem.classe.ilike(f"%{form_procurar_pers.classe.data}%"),
+        ).paginate(page=1, per_page=9)
     else:
-        personagens = db.session.query(Personagem).filter(
-            Personagem.nome.like('%%')
-        ).from_self().paginate(page=pagina, per_page=9)
+        personagens = Personagem.query.paginate(page=pagina, per_page=9)
 
     return render_template(
         'procurar_personagem.html',

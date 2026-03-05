@@ -14,7 +14,7 @@ class Usuario(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(33), unique=True, nullable=False)
     email = db.Column(db.String(180), unique=True, nullable=False)
-    senha = db.Column(db.String(60), nullable=False)
+    senha = db.Column(db.String(128), nullable=False)
     data_registro = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     isAdmin = db.Column(db.Boolean, nullable=False, default=False)
     foto = db.Column(db.String(20), nullable=False, default='usuario.png')

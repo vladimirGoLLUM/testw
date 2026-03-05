@@ -1,10 +1,11 @@
-class Config:
-    
-    #Chave pra criptografia
-    SECRET_KEY= 'bd023b5638a8f04016fdedf53a2f3736'
+import os
 
-    #Caminho e configuração para o Banco de Dados
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///rpg.db'
+class Config:
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'bd023b5638a8f04016fdedf53a2f3736'
+
+    # Используем PostgreSQL, если доступен, иначе SQLite (для локальной разработки)
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///rpg.db'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     #Configuração para o envio de e-mails
     MAIL_SERVER = 'smtp.googlemail.com'
